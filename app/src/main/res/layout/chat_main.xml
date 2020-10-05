@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:emojicon="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/root_view"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff">
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/colorPrimary"
+        android:orientation="horizontal"
+        android:padding="16dp"
+        emojicon:layout_constraintEnd_toEndOf="parent"
+        emojicon:layout_constraintStart_toStartOf="parent"
+        emojicon:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center|left"
+            android:layout_weight="1"
+            android:text="Live Chat"
+            android:textColor="#000000"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tv_online"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="0"
+            android:gravity="center|left"
+            android:text="null Online"
+            android:textColor="#00C853"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:fillViewport="true"
+        emojicon:layout_constraintBottom_toTopOf="@+id/linearLayout3"
+        emojicon:layout_constraintEnd_toEndOf="parent"
+        emojicon:layout_constraintStart_toStartOf="parent"
+        emojicon:layout_constraintTop_toBottomOf="@+id/linearLayout">
+
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/scroll"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fillViewport="true">
+
+            <LinearLayout
+                android:id="@+id/container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="20dp"
+                android:orientation="vertical" />
+
+        </androidx.core.widget.NestedScrollView>
+
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+
+
+    <LinearLayout
+        android:id="@+id/linearLayout3"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/colorPrimary"
+        android:gravity="center"
+        android:orientation="horizontal"
+        emojicon:layout_constraintBottom_toBottomOf="parent"
+        emojicon:layout_constraintEnd_toEndOf="parent"
+        emojicon:layout_constraintStart_toStartOf="parent">
+
+        <ImageView
+            android:id="@+id/emoji_btn"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_weight="0"
+            android:padding="4dp"
+            android:background="@drawable/bg_cardview_riple"
+            android:clickable="true"
+            android:focusable="true"
+            android:src="@drawable/ic_round_emoji_emotions_24"
+            emojicon:tint="#000000" />
+
+        <hani.momanii.supernova_emoji_library.Helper.EmojiconEditText
+            android:id="@+id/emojicon_edit_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textSize="20dp"
+            android:theme="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            emojicon:emojiconSize="28sp" />
+
+        <ImageView
+            android:id="@+id/submit_btn"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_weight="0"
+            android:padding="4dp"
+            android:background="@drawable/bg_cardview_riple"
+            android:clickable="true"
+            android:focusable="true"
+            android:src="@drawable/ic_round_send_24"
+            emojicon:tint="#000000" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_join"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="JOIN"
+        android:textColor="#000000"
+        android:textStyle="bold"
+        android:visibility="gone"
+        emojicon:layout_constraintBottom_toBottomOf="parent"
+        emojicon:layout_constraintEnd_toEndOf="parent"
+        emojicon:layout_constraintStart_toStartOf="parent"
+        emojicon:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_not_support"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Server does not\nSupport Chat"
+        android:textColor="#000000"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:visibility="visible"
+        emojicon:layout_constraintBottom_toBottomOf="parent"
+        emojicon:layout_constraintEnd_toEndOf="parent"
+        emojicon:layout_constraintStart_toStartOf="parent"
+        emojicon:layout_constraintTop_toTopOf="parent" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

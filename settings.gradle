@@ -1,0 +1,3 @@
+include ':socketcluster-java-client'
+include ':app'
+rootProject.name = "Tauon Music Stream"
