@@ -11,7 +11,7 @@ android {
         minSdkVersion 21
         targetSdkVersion 30
         versionCode 1
-        versionName "1.3"
+        versionName "1.4"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -42,24 +42,15 @@ dependencies {
     implementation 'androidx.constraintlayout:constraintlayout:2.0.1'
     implementation 'com.google.android.material:material:1.2.1'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
-    //implementation 'androidx.navigation:navigation-fragment:2.3.0'
-    //implementation 'androidx.navigation:navigation-ui:2.3.0'
     implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
     implementation 'androidx.multidex:multidex:2.0.1'
-    testImplementation 'junit:junit:4.12'
+    testImplementation 'junit:junit:4.13'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
 
     // EXOPlayer
     implementation 'com.google.android.exoplayer:exoplayer:2.12.0'
     implementation 'com.google.android.exoplayer:exoplayer-core:2.12.0'
-
-    // Custom Module Socketcluster-client
-    implementation project(':socketcluster-java-client')
-    //
-    implementation 'com.neovisionaries:nv-websocket-client:2.10'
-    // Emoji
-    implementation 'hani.momanii.supernova_emoji_library:supernova-emoji-library:0.0.2'
 
     // Retrofit
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
@@ -79,8 +70,5 @@ dependencies {
 
     // Open Source License
     implementation 'com.google.android.gms:play-services-oss-licenses:17.0.0'
-
-    // Lottie
-    implementation 'com.airbnb.android:lottie:3.4.1'
 
 }

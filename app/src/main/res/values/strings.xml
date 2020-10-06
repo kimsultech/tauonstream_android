@@ -17,6 +17,9 @@
     <string name="menu_changelog">Changelog</string>
 
     <string name="changelog">
+        v1.4\n
+        - remove Live Chat\n
+        - remove Lottie Animation\n
         v1.3\n
         - Remove unused Library\n
         - Added First Launch add Stream\n
@@ -29,7 +32,7 @@
         - Fix some Bug..\n\n
         v1.1\n
         - Added Progress\n
-        - Added Refresh Animation\n
+        - Added Refresh Lottie Animation\n
         - Added info \"No Lyrics\" if Lyrics Null\n
         - Fix some Bug..\n\n
         v1.0\n

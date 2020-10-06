@@ -189,14 +189,13 @@
                 android:focusable="true"
                 android:background="@drawable/bg_cardview_riple">
 
-                <com.airbnb.lottie.LottieAnimationView
-                    android:id="@+id/lav_refresh"
-                    android:layout_width="28dp"
-                    android:layout_height="28dp"
+                <ImageView
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
                     android:elevation="2dp"
-                    app:lottie_fileName="13005-refresh.json"
-                    app:lottie_loop="false"
-                    app:lottie_autoPlay="false"/>
+                    android:padding="5dp"
+                    app:srcCompat="@drawable/ic_round_replay_24"
+                    app:tint="#000000" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -221,17 +220,17 @@
                 android:background="@drawable/bg_cardview_riple">
 
                 <ImageView
-                    android:layout_width="28dp"
-                    android:layout_height="28dp"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
                     android:elevation="2dp"
                     android:padding="5dp"
-                    app:srcCompat="@drawable/ic_round_chat_24"
+                    app:srcCompat="@drawable/ic_round_stop_24"
                     app:tint="#000000" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Live Chat"/>
+                    android:text="Stop"/>
             </LinearLayout>
 
 
