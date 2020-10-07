@@ -3,6 +3,7 @@ package com.kangtech.tauonstream;
 import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
@@ -28,10 +29,13 @@ import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.cardview.widget.CardView;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import com.google.android.exoplayer2.ExoPlaybackException;
 import com.google.android.exoplayer2.MediaItem;
+import com.google.android.exoplayer2.Player;
 import com.google.android.exoplayer2.SimpleExoPlayer;
 import com.google.android.gms.oss.licenses.OssLicensesMenuActivity;
 import com.google.android.material.navigation.NavigationView;
@@ -80,6 +84,10 @@ public class MainActivity extends AppCompatActivity {
 
     private Button btnJoin;
 
+    private ConstraintLayout clServerError, clContentMain;
+    private ProgressBar pbMain;
+    private TextView tvIpPortErr;
+
     public MainActivity() {
     }
 
@@ -104,10 +112,14 @@ public class MainActivity extends AppCompatActivity {
 
         pbSong = findViewById(R.id.pb_song);
 
-
         btnJoin = findViewById(R.id.btn_join);
 
         tvNotSupportChat = findViewById(R.id.tv_not_support);
+
+        clContentMain = findViewById(R.id.cl_content_main);
+        clServerError = findViewById(R.id.cl_server_error);
+        pbMain = findViewById(R.id.progressBar_main);
+        tvIpPortErr = findViewById(R.id.tv_ip_port);
 
         tvTitleSong.setSelected(true);
 
@@ -178,13 +190,13 @@ public class MainActivity extends AppCompatActivity {
         drawer.addDrawerListener(actionBarDrawerToggle);
 
 
-        LinearLayout llNavChat = findViewById(R.id.ll_nav_chat);
+/*        LinearLayout llNavChat = findViewById(R.id.ll_nav_chat);
         llNavChat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                drawer.openDrawer(navigationView);
+                player.stop();
             }
-        });
+        });*/
 
 
 
@@ -234,6 +246,7 @@ public class MainActivity extends AppCompatActivity {
         player.prepare();
         // Start the playback.
         player.play();
+
     }
 
 
@@ -307,19 +320,24 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onSubscribe(Disposable d) {
                         Log.e("gett dsub1212 ", d.toString());
+                        //pbMain.setVisibility(View.VISIBLE);
                     }
 
                     @Override
                     public void onNext(updateModel updateModel) {
-
                         getSongPosition = updateModel.position;
-
                     }
 
+                    @SuppressLint("SetTextI18n")
                     @Override
                     public void onError(Throwable e) {
-                        Log.e("gett erro12121r ", e.toString());
 
+                        tvIpPortErr.setText(SharedPreferencesUtils.getString("ip", "ip") + ":" + SharedPreferencesUtils.getString("port", "port"));
+
+                        pbMain.setVisibility(View.GONE);
+
+                        clServerError.setVisibility(View.VISIBLE);
+                        clContentMain.setVisibility(View.GONE);
                     }
 
                     @SuppressLint("SetTextI18n")
@@ -349,6 +367,11 @@ public class MainActivity extends AppCompatActivity {
                             },delay);
                         }
                         pbSong.setProgress(getSongPositionRound);
+
+                        pbMain.setVisibility(View.GONE);
+
+                        clServerError.setVisibility(View.GONE);
+                        clContentMain.setVisibility(View.VISIBLE);
 
                     }
                 });
@@ -419,6 +442,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        SharedPreferences.Editor editor;
+
         switch (item.getItemId()) {
             case R.id.menu_about :
                 Intent intent = new Intent(this, AboutActivity.class);
@@ -430,6 +455,19 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             case R.id.menu_changelog :
                 mDialog.show();
+                return true;
+            case R.id.menu_add_server :
+                editor = getSharedPreferences("tauon_stream", MODE_PRIVATE).edit();
+                editor.putString("ip", "");
+                editor.putString("port", "");
+                editor.putBoolean("is_stream", false);
+                editor.apply();
+
+                Intent intent3 = new Intent(this, AddStream.class);
+                startActivity(intent3);
+
+                player.stop(true);
+                finish();
                 return true;
 
             default:

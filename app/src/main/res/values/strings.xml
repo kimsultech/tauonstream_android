@@ -43,4 +43,6 @@
     <string name="login">Login</string>
     <string name="cancel">Cancel</string>
     <string name="join">Join</string>
+    <string name="add_server">Add Server</string>
+    <string name="max_min">Max/Min</string>
 </resources>
