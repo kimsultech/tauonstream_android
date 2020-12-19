@@ -29,7 +29,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:fontFamily="@font/poppins_bold"
-            android:text="Can't Connect to \n Server"
+            android:text="Can't Connect \n to Server"
             android:textAlignment="center"
             android:textColor="#000000"
             android:textSize="20sp" />

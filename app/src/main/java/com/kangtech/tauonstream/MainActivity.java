@@ -57,8 +57,6 @@ public class MainActivity extends AppCompatActivity {
     private SimpleExoPlayer player;
     private MediaItem mediaItem;
 
-    private LinearLayout llRefresh;
-
     private TextView tvStation;
 
     private TextView tvTitleSong, tvLyrics;
@@ -103,7 +101,6 @@ public class MainActivity extends AppCompatActivity {
         tvStation = findViewById(R.id.tv_station);
         tvStation.setText(SharedPreferencesUtils.getString("ip", "Station"));
 
-        llRefresh = findViewById(R.id.ll_nav_refresh);
         ivCoverAlbum = findViewById(R.id.iv_cover_album);
         tvTitleSong = findViewById(R.id.tv_title_song);
         tvLyrics = findViewById(R.id.tv_lyrics);
@@ -127,13 +124,6 @@ public class MainActivity extends AppCompatActivity {
         player = new SimpleExoPlayer.Builder(this).build();
 
 
-        /*Intent Stream = new Intent(this, StreamService.class);
-        Stream.putExtra("play", "play");
-        startService(Stream);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            startForegroundService(Stream);
-        }*/
-
         if (player.isPlaying()) {
             player.stop(true);
         } else {
@@ -145,28 +135,6 @@ public class MainActivity extends AppCompatActivity {
 
         delayed();
 
-        //customNotification();
-
-
-        llRefresh.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-
-                if (player.isPlaying()) {
-                    player.stop(true);
-
-                    initPlay();
-                    geDataMusic();
-                } else {
-                    initPlay();
-                    geDataMusic();
-                }
-                Log.e("Posisi nya", String.valueOf(player.getCurrentPosition()));
-
-
-            }
-        });
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -188,16 +156,6 @@ public class MainActivity extends AppCompatActivity {
             }
         };
         drawer.addDrawerListener(actionBarDrawerToggle);
-
-
-/*        LinearLayout llNavChat = findViewById(R.id.ll_nav_chat);
-        llNavChat.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                player.stop();
-            }
-        });*/
-
 
 
         Log.e("OnCreate", "yapp");
@@ -377,43 +335,6 @@ public class MainActivity extends AppCompatActivity {
                 });
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.O)
-    private void customNotification() {
-/*        Intent notifyIntent = new Intent(this, MainActivity.class);
-        notifyIntent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
-        PendingIntent pendingIntent = PendingIntent.getActivities(this, 0,
-                new Intent[]{notifyIntent}, PendingIntent.FLAG_UPDATE_CURRENT);
-
-        Notification notification = new Notification.Builder(this)
-                .setSmallIcon(R.drawable.ic_round_play_arrow_24)
-                .setContentTitle("title")
-                .setContentText("Don't CLick Here")
-                .setAutoCancel(true)
-                .setOngoing(true)
-                .setChannelId("313131")
-                .setContentIntent(pendingIntent)
-                .build();
-
-        notification.defaults |= Notification.DEFAULT_SOUND;
-        NotificationManager notificationManager =
-                (NotificationManager) getApplicationContext().getSystemService(Context.NOTIFICATION_SERVICE);
-
-        // === Removed some obsoletes
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)
-        {
-            String channelId = "313131";
-            NotificationChannel channel = new NotificationChannel(
-                    channelId,
-                    "Channel human readable title",
-                    NotificationManager.IMPORTANCE_LOW);
-            notificationManager.createNotificationChannel(channel);
-        }
-
-
-        // notificationId is a unique int for each notification that you must define
-        notificationManager.notify(0, notification);*/
-    }
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -422,6 +343,8 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
+    @SuppressLint("NonConstantResourceId")
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
@@ -445,6 +368,17 @@ public class MainActivity extends AppCompatActivity {
         SharedPreferences.Editor editor;
 
         switch (item.getItemId()) {
+            case R.id.menu_refresh :
+                if (player.isPlaying()) {
+                    player.stop(true);
+
+                    initPlay();
+                    geDataMusic();
+                } else {
+                    initPlay();
+                    geDataMusic();
+                }
+                return true;
             case R.id.menu_about :
                 Intent intent = new Intent(this, AboutActivity.class);
                 startActivity(intent);
